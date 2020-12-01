@@ -1,0 +1,12 @@
+
+.pull-left{
+	float: right !important;
+}
+
+.pull-right{
+	float: left !important;
+}
+
+.sidebar-mini {
+    padding-right: 0 !important;
+}
