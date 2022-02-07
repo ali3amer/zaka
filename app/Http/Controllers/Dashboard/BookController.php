@@ -19,11 +19,11 @@ class BookController extends Controller
         if ($request->book == 'all') {
             return Book::all()->keyBy('id');
         } elseif ($request->user != null) {
-            return Book::where('user_id', $request->user)->latest()->paginate(5);
+            return Book::where('user_id', $request->user)->paginate(5);
         } elseif ($request->userReceipt != null) {
             return Book::where('user_id', $request->userReceipt)->get();
         } else {
-            return Book::latest()->paginate(5);
+            return Book::paginate(5);
         }
 
     }
@@ -51,13 +51,15 @@ class BookController extends Controller
         $this->validate($request, [
             'number' => 'required|unique:books|integer',
             'start' => 'required|integer',
-            'end' => 'required|integer'
+            'end' => 'required|integer',
+            'user_id' => 'required|integer',
         ]);
 
         return Book::create([
             'number' => $request['number'],
             'start' => $request['start'],
             'end' => $request['end'],
+            'user_id' => $request['user_id'],
         ]);
     }
 
